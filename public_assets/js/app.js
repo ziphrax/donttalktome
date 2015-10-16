@@ -6,7 +6,10 @@ $(function(){
     });
 
     $('#updatePosition').click(function(){
-        UpdatePosition($('#lat').val(),$('#long').val());
+        navigator.geolocation.getCurrentPosition(function(position){
+          alert(position.coords.latitude + ','+ position.coords.longitude);
+          UpdatePosition(position.coords.latitude,position.coords.longitude);
+        });
     });
 
     $('#getNearest').click(function(){
