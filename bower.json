@@ -1,0 +1,30 @@
+{
+  "name": "donttalktome",
+  "version": "0.0.0",
+  "authors": [
+    "David Jones <david.jones@mso.net <david.jones@mso.net <>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "handlebars": "~4.0.2",
+    "jquery": "~2.1.4",
+    "moment": "~2.10.6",
+    "angular": "~1.4.7",
+    "angular-resource": "~1.4.7",
+    "angular-moment": "~0.10.3",
+    "angular-ui-router": "~0.2.15",
+    "angular-datepicker": "~1.0.17",
+    "font-awesome": "~4.4.0"
+  },
+  "resolutions": {
+    "angular": ">= 1.0.8"
+  }
+}
