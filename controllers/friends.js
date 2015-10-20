@@ -65,7 +65,7 @@ module.exports = {
                 res.status(500).json({'success': false, data: err });
             } else if (doc){
                 userModel
-                    .find({ location: {'$near': doc.location , '$maxDistance': req.body.maxDistance} },'name location')
+                    .find({ location: {'$near': doc.location , '$maxDistance': req.body.maxDistance} },'name location status')
                     .limit(10)
                     .exec(function(err, docs) {
                         res.status(200).json({'success': true, 'maxDistance':req.body.maxDistance, 'data': [docs] });
