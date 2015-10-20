@@ -1,17 +1,17 @@
 <!Doctype HTML>
 <html>
     <head>
-        <title>To The Few</title>
+        <title>Chatsplosion</title>
         <link rel="stylesheet" href="/public/libs/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="/public/libs/bootstrap/dist/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="/public/libs/angular-datepicker/dist/angular-datepicker.min.css">
         <link rel="stylesheet" href="/public/libs/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="/public/css/app.css">
     </head>
     <body>
 
-        <div id="alert" class="alert">
+        <div id="alert" class="alert" style="display:none;">
             <p>This stores you access token in local storage, and requires access to your location in order to support the apps functionality.</p>
+            <button id="dismiss">Dismiss</button>
         </div>
 
         <div id="login">
@@ -40,7 +40,6 @@
 
         <script type="text/javascript" src="/public/libs/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="/public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/public/libs/moment/moment.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js"></script>
         <script type="text/javascript" src="/public/js/app.js"></script>
     </body>

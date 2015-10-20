@@ -13,6 +13,10 @@ $(function(){
         Authenticate($('#username').val(),$('#password').val());
     });
 
+    $('#dismiss').click(function(){
+        localStorage.setItem("readnotice",true);
+    });
+
     $('#update').click(function(){
         navigator.geolocation.getCurrentPosition(function(position){
           initialize_maps(position.coords.latitude,position.coords.longitude);
@@ -23,6 +27,12 @@ $(function(){
     $('#fit').click(function(){
         fit();
     });
+
+    function checkNotice(){
+        if(!localStorage.readnotice){
+            $('#alert').show();
+        }
+    }
 
     function updater(){
         var status = $('#status').val();
