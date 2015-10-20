@@ -3,6 +3,7 @@ $(function(){
     var map;
     var mapProp;
     var markers = [];
+    var infoWindow = new google.maps.InfoWindow();
 
     $('#login').click(function(){
         Authenticate($('#username').val(),$('#password').val());
@@ -68,6 +69,13 @@ $(function(){
         });
     }
 
+    function createInfoWindow(marker, popupContent) {
+        google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.setContent(popupContent);
+            infoWindow.open(map, this);
+        });
+    }
+
     function getNearest(){
         $.ajax({
             type:"GET",
@@ -81,12 +89,20 @@ $(function(){
                 $.each(response.data[0],function(index,val){
                     output += '<li>' + val.name + ' ( ' + val.location[0] + ' , ' + val.location[1]+' ) ' + '</li>';
                     var myLatLng = {lat: val.location[0], lng: val.location[1]};
-                    markers.push(new google.maps.Marker({
+                    var contentString = val.name;
+
+                    infoWindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+                    var marker = new google.maps.Marker({
                        position: myLatLng,
                        map: map,
-                       label: val.name,
                        title: 'Hello World!'
-                   }));
+                   });
+
+                   createInfoWindow(marker, contentString);
+
+                    markers.push(marker);
                 });
 
                 $('#friends').html(output);
