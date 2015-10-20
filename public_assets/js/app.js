@@ -157,7 +157,7 @@ $(function(){
                 var output = '';
                 markers = [];
                 $.each(response.data[0],function(index,val){
-                    output += '<li>' + val.name + ' ( ' + val.location[0] + ' , ' + val.location[1]+' ) ' + '</li>';
+                    output += '<li class="list-group-item">' + val.name + ' ( ' + val.location[0] + ' , ' + val.location[1]+' ) ' + '</li>';
                     var myLatLng = {lat: val.location[0], lng: val.location[1]};
                     var contentString = val.name + ':' + val.status;
 
