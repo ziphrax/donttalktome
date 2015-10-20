@@ -1,14 +1,17 @@
 $(function(){
     var jwt = '';
+    var map;
+    var mapProp;
+    var markers = [];
 
     $('#login').click(function(){
         Authenticate($('#username').val(),$('#password').val());
     });
 
-    $('#updatePosition').click(function(){
+    $('#update').click(function(){
+        var status = $('#status').val();
         navigator.geolocation.getCurrentPosition(function(position){
-          alert(position.coords.latitude + ','+ position.coords.longitude);
-          UpdatePosition(position.coords.latitude,position.coords.longitude);
+          Update(position.coords.latitude,position.coords.longitude,status);
         });
     });
 
@@ -36,11 +39,24 @@ $(function(){
         });
     }
 
-    function UpdatePosition(x,y){
+    function initialize_maps(x,y) {
+      mapProp = {
+        center:new google.maps.LatLng(x,y),
+        zoom:5,
+        mapTypeId:google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+    }
+
+    function Update(x,y,status){
         var data = {
             lattitude : x,
-            longitude : y
+            longitude : y,
+            status: status
         };
+        $('#lat').val(x);
+        $('#long').val(y);
+        initialize_maps(x,y)
         $.ajax({
             type:"POST",
             beforeSend: function (request)
@@ -64,7 +80,15 @@ $(function(){
                 var output = '';
                 $.each(response.data[0],function(index,val){
                     output += '<li>' + val.name + ' ( ' + val.location[0] + ' , ' + val.location[1]+' ) ' + '</li>';
+                    var myLatLng = {lat: val.location[0], lng: val.location[1]};
+                    markers.push(new google.maps.Marker({
+                       position: myLatLng,
+                       map: map,
+                       label: val.name,
+                       title: 'Hello World!'
+                   }));
                 });
+
                 $('#friends').html(output);
             }
         });

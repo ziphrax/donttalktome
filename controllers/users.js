@@ -75,9 +75,14 @@ module.exports = {
             if(err){
                 res.status(500).json({'success': false, 'message': err.message });
             } else if (doc) {
-                doc.location = [req.body.lattitude, req.body.longitude];
+                doc.location = [parseFloat(req.body.lattitude), parseFloat(req.body.longitude)];
+                doc.status = req.body.status;
                 doc.save(function(err){
-                    res.status(200).json({'success': true, 'message': 'Position Updated' ,'data':doc});
+                    if(err){
+                        res.status(500).json({'success': false, 'message': err.message });
+                    } else {
+                        res.status(200).json({'success': true, 'message': 'Position Updated' ,'data':doc});
+                    }
                 });
             } else {
                 res.status(404).json({'success': false, 'message': 'The requested resource does not exist.' });
