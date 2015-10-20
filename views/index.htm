@@ -10,10 +10,20 @@
     </head>
     <body>
 
-        JWT: <span id="jwt"></span><br />
-        <input id="username" type="text" /><br />
-        <input id="password" type="text" /><br />
-        <button id="login">Log in</button><br />
+        <div id="alert" class="alert">
+            <p>This stores you access token in local storage, and requires access to your location in order to support the apps functionality.</p>
+        </div>
+
+        <div id="login">
+            JWT: <span id="jwt"></span><br />
+            <input id="username" type="text" autocomplete="false"/><br />
+            <input id="password" type="password" autocomplete="false"/><br />
+            <button id="login">Log in</button><br />
+        </div>
+
+        <div id="logout" style="display:none;">
+            <button id="logout">Logout</button>
+        </div>
 
         Position: <span id="jwt"></span><br />
         <input id="lat" type="text" /><br />
@@ -22,9 +32,11 @@
         <button id="update">Update</button><br />
 
         Friends:<br />
-        <ul id="friends"></ul>        
+        <ul id="friends"></ul>
+        <button id="fit" style="display:none;">Fit</button><br />
         <div id="googleMap" style="width:500px;height:380px;"></div>
         <button id="getNearest">Get Nearest</button><br />
+
 
         <script type="text/javascript" src="/public/libs/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="/public/libs/bootstrap/dist/js/bootstrap.min.js"></script>

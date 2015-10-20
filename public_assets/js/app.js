@@ -4,21 +4,60 @@ $(function(){
     var mapProp;
     var markers = [];
     var infoWindow = new google.maps.InfoWindow();
+    var updaterTimeout = '';
+    var mapReady = false;
+
+    checkAuth();
 
     $('#login').click(function(){
         Authenticate($('#username').val(),$('#password').val());
     });
 
     $('#update').click(function(){
+        navigator.geolocation.getCurrentPosition(function(position){
+          initialize_maps(position.coords.latitude,position.coords.longitude);
+        });
+        updater();
+    });
+
+    $('#fit').click(function(){
+        fit();
+    });
+
+    function updater(){
         var status = $('#status').val();
         navigator.geolocation.getCurrentPosition(function(position){
           Update(position.coords.latitude,position.coords.longitude,status);
         });
-    });
+        updaterTimeout = setTimeout(updater,3000);
+    }
 
     $('#getNearest').click(function(){
         getNearest();
     });
+
+    $('#logout').click(function(){
+        logout();
+        $('#logout').hide();
+    });
+
+    function logout(){
+        jwt = '';
+        localStorage.removeItem("username");
+        localStorage.removeItem("jwt");
+        checkAuth();
+    }
+
+    function checkAuth(){
+        var tempJWT = localStorage.jwt;
+        if(tempJWT){
+            jwt = tempJWT;
+            $('#login').hide();
+            $('#logout').show();
+        } else {
+            $('#login').show();
+        }
+    }
 
     function Authenticate(username,password){
         var data = {
@@ -35,7 +74,10 @@ $(function(){
             data: $.param(data),
             success: function(response) {
                 jwt = response.token;
+                localStorage.setItem("username",username);
+                localStorage.setItem("jwt",jwt);
                 $('#jwt').html(jwt);
+                checkAuth();
             }
         });
     }
@@ -47,6 +89,8 @@ $(function(){
         mapTypeId:google.maps.MapTypeId.ROADMAP
       };
       map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+      mapReady = true;
+      $('#fit').show();
     }
 
 
@@ -57,9 +101,12 @@ $(function(){
             longitude : y,
             status: status
         };
+
         $('#lat').val(x);
         $('#long').val(y);
-        initialize_maps(x,y)
+        if(mapReady){
+            map.panTo(new google.maps.LatLng(x,y));
+        }
         $.ajax({
             type:"POST",
             beforeSend: function (request)
@@ -67,7 +114,9 @@ $(function(){
                 request.setRequestHeader('x-access-token', jwt);
             },
             url: "/api/v1/users/position",
-            data: $.param(data)
+            data: $.param(data),success:function(){
+                getNearest();
+            }
         });
     }
 
@@ -115,8 +164,6 @@ $(function(){
 
                     markers.push(marker);
                 });
-
-                fit();
 
                 $('#friends').html(output);
             }
