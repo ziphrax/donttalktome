@@ -49,6 +49,8 @@ $(function(){
       map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
     }
 
+
+
     function Update(x,y,status){
         var data = {
             lattitude : x,
@@ -76,6 +78,14 @@ $(function(){
         });
     }
 
+    function fit(){
+        var latlngbounds = new google.maps.LatLngBounds();
+        for (var i = 0; i < markers.length; i++) {
+          latlngbounds.extend(markers[i].position);
+        }
+        map.fitBounds(latlngbounds);
+    }
+
     function getNearest(){
         $.ajax({
             type:"GET",
@@ -86,6 +96,7 @@ $(function(){
             url: "/api/v1/friends/nearest",
             success: function(response) {
                 var output = '';
+                markers = [];
                 $.each(response.data[0],function(index,val){
                     output += '<li>' + val.name + ' ( ' + val.location[0] + ' , ' + val.location[1]+' ) ' + '</li>';
                     var myLatLng = {lat: val.location[0], lng: val.location[1]};
@@ -104,6 +115,8 @@ $(function(){
 
                     markers.push(marker);
                 });
+
+                fit();
 
                 $('#friends').html(output);
             }
