@@ -51,17 +51,29 @@ $(function(){
         jwt = '';
         localStorage.removeItem("username");
         localStorage.removeItem("jwt");
-        checkAuth();
+        updaterTimeout = false;
+        $('#login-form').show();
+        $('#logout').hide();
+        $('#status-form').hide();
+        $('#google-map').hide();
+        $('#friends-list').hide();
+        map = null;
+        markers = [];
+        infoWindow = [];
+        mapReady = false;
     }
 
     function checkAuth(){
         var tempJWT = localStorage.jwt;
         if(tempJWT){
             jwt = tempJWT;
-            $('#login').hide();
+            $('#login-form').hide();
             $('#logout').show();
+            $('#status-form').show();
+            $('#google-map').show();
+            $('#friends-list').show();
         } else {
-            $('#login').show();
+            $('#login-form').show();
         }
     }
 
