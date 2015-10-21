@@ -11,10 +11,10 @@ router.route('/')
 router.route('/position')
     .post(usersController.updatePosition);
 
-router.route('/:id')
+/*router.route('/:id')
     .get(usersController.getUser)
     .post(usersController.updateUser)
-    .delete(usersController.deleteUser);
+    .delete(usersController.deleteUser);*/
 
 
 

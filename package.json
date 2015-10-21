@@ -15,7 +15,8 @@
     "mongoose": "^4.1.8",
     "morgan": "^1.6.1",
     "nodemailer": "0.7.1",
-    "nodemailer-stub-transport": "^1.0.0"
+    "nodemailer-stub-transport": "^1.0.0",
+    "sanitize-html": "^1.11.1"
   },
   "devDependencies": {
     "chai": "^3.3.0",

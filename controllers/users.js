@@ -1,4 +1,5 @@
 var userModel = require('./../models/user');
+var sanitizeHtml = require('sanitize-html');
 
 module.exports = {
     getUsers: function(req,res){
@@ -76,7 +77,7 @@ module.exports = {
                 res.status(500).json({'success': false, 'message': err.message });
             } else if (doc) {
                 doc.location = [parseFloat(req.body.lattitude), parseFloat(req.body.longitude)];
-                doc.status = req.body.status;
+                doc.status = sanitizeHtml(req.body.status);
                 doc.save(function(err){
                     if(err){
                         res.status(500).json({'success': false, 'message': err.message });
