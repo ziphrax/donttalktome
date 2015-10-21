@@ -56,7 +56,7 @@ $(function(){
         $('#logout').hide();
         $('#status-form').hide();
         $('#google-map').hide();
-        $('#friends-list').hide();
+        //$('#friends-list').hide();
         map = null;
         markers = [];
         infoWindow = [];
@@ -71,7 +71,7 @@ $(function(){
             $('#logout').show();
             $('#status-form').show();
             $('#google-map').show();
-            $('#friends-list').show();
+            //$('#friends-list').show();
         } else {
             $('#login-form').show();
         }

@@ -1,6 +1,37 @@
-body {
+html, body, .container-fluid {
+    height:100%;
     background-color: #252566;
 }
+#alert-message {
+    height: 1%;
+}
+#header {
+    height: 7%;
+}
+#login-form{
+    height:10%;
+}
+#status-form{
+    height:7%;
+}
+#google-map, #google-map > div.col-xs-12 {
+    height:75%;
+}
+#google-map > div.col-xs-12 {
+    height:100% !important;
+}
+#googleMap {
+    width:100% !important;
+    height:100% !important;
+}
+#friends-list{
+    height:20%;
+}
+
+#footer {
+    height:15%;
+}
+
 #googleMap {
     border-radius: 4px;
 }
