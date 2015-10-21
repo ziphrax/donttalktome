@@ -42,10 +42,6 @@ $(function(){
         updaterTimeout = setTimeout(updater,3000);
     }
 
-    $('#getNearest').click(function(){
-        getNearest();
-    });
-
     $('#logout').click(function(){
         logout();
         $('#logout').hide();
@@ -112,8 +108,6 @@ $(function(){
             status: status
         };
 
-        $('#lat').val(x);
-        $('#long').val(y);
         if(mapReady){
             map.panTo(new google.maps.LatLng(x,y));
         }

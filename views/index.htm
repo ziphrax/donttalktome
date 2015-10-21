@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Chatsplosion</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/public/libs/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="/public/libs/bootstrap/dist/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/public/libs/font-awesome/css/font-awesome.min.css">
@@ -26,34 +27,48 @@
                         JWT: <span id="jwt"></span><br />
                         <input id="username" type="text" autocomplete="false" placeholder="username" class="form-control"/><br />
                         <input id="password" type="password" autocomplete="false" placeholder="password" class="form-control"/><br />
-                        <button id="login" class="btn btn-primary">Log in</button><br />
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div id="logout" style="display:none;">
-                        <button id="logout" class="btn btn-primary">Logout</button>
+                        <button id="login" class="btn btn-default">Log in</button><br />
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-xs-12">
-                    Position: <span id="jwt"></span><br />
-                    <input id="lat" type="text" class="form-control" /><br />
-                    <input id="long" type="text"class="form-control" /><br />
-                    <input id="status" type="text" value="active" class="form-control"/><br />
-                    <button id="update" class="btn btn-primary">Update</button><br />
+                    <div class="input-group">
+                      <span class="input-group-addon" id="input-addon1">Status:</span>
+                      <input id="status" type="text" class="form-control" aria-label="Text input with segmented button dropdown" placeholder="Type your status here...">
+                      <div class="input-group-btn">
+                        <button id="update" type="button" class="btn btn-default">Update</button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <span class="caret"></span>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li><a href="#" id="fit">Fit Map</a></li>
+                          <li><a href="#" id="logout">Logout</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <br />
                 </div>
             </div>
 
 
             <div class="row">
                 <div class="col-xs-12">
-                    Friends:<br />
-                    <ul id="friends" class="list-group"></ul>
-                    <button id="fit" class="btn btn-primary" style="display:none;">Fit</button><br />
-                    <div id="googleMap" style="width:100%;height:250px;"></div>
-                    <button id="getNearest" class="btn btn-primary">Get Nearest</button><br />
+                    <div id="googleMap" style="width:100%;height:250px"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul id="friends" class="list-group" style="display:none;"></ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <p class="footer-text">Copyright 2015</p>
                 </div>
             </div>
     </div>
