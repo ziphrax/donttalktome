@@ -21,19 +21,6 @@ describe(namespace + '/friends',function(){
         });
   });
 
-  it('should get friends list',function(done){
-    request(app)
-      .get(namespace + '/friends/562101e1e7dd283830fda547')
-      .set('x-access-token',jwt)
-      .expect(200)
-      .expect(function(res){
-          res.body.should.have.property('success',true);
-          res.body.should.have.property('data');
-          res.body.data.should.be.instanceOf(Array);
-      })
-      .end( done );
-  });
-
   it('POST /friends/makeFriends should send friends request',function(done){
     this.timeout(10000);
     request(app)
