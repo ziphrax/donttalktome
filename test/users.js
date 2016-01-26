@@ -43,6 +43,14 @@ describe(namespace + '/users',function(){
         .end( done );
     });
 
+    it('GET / without auth should 401 again',function(done){
+      request(app)
+        .get(namespace + '/users/')
+        .set('x-access-token','')
+        .expect(401)
+        .end( done );
+    });
+
     it('GET /:ID',function(done){
       request(app)
         .get(namespace + '/users/562101e1e7dd283830fda547')
